@@ -4,30 +4,30 @@ using TaxiApi.Models;
 namespace TaxiApi.Controllers
 {
     [ApiController]
-    [Route("[UserController]")]
+    [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private List<User> _users = new List<User>();
+        private List<User> _users = new List<User>();       
 
-
-        //[HttpPost]
-        //[Route("AddUser")]
-        //public string AddUser(User user)
-        //{
-        //    _users.Add(user);
-        //    return "Success";
-        //}
-
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpPost]
+        [Route("AddUser")]
+        public IActionResult AddUser(User user)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                //Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            _users.Add(user);
+            return Ok(user);
         }
+
+        [HttpGet]
+        [Route("GetUser")]
+        public IActionResult GetUser()
+        {
+            var user = new User() { FirstName="Balachandar", 
+                LastName="Jeganathan", 
+                Email="balachandar@gmail.com",
+                Phone="9034267303"
+            };
+            return Ok(user);
+        }
+
     }
 }

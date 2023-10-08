@@ -7,13 +7,15 @@ namespace TaxiApi.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private List<User> _users = new List<User>();       
+        private List<User> _users = new List<User>();  
+        private TaxiDataAccess _dataAccess = new TaxiDataAccess();
+
 
         [HttpPost]
         [Route("AddUser")]
         public IActionResult AddUser(User user)
         {
-            _users.Add(user);
+            _dataAccess.AddUser(user);            
             return Ok(user);
         }
 
@@ -21,12 +23,8 @@ namespace TaxiApi.Controllers
         [Route("GetUser")]
         public IActionResult GetUser()
         {
-            var user = new User() { FirstName="Balachandar", 
-                LastName="Jeganathan", 
-                Email="balachandar@gmail.com",
-                Phone="9034267303"
-            };
-            return Ok(user);
+            var users = _dataAccess.GetUsers();
+            return Ok(users);
         }
 
     }

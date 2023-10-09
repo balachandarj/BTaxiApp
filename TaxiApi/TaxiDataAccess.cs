@@ -1,5 +1,5 @@
 ﻿using System.Data.SQLite;
-using TaxiApi.Models;
+using TaxiModel.Models;
 
 namespace TaxiApi
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaxiApi.Models;
+using TaxiModel.Models;
 
 namespace TaxiApi.Controllers
 {

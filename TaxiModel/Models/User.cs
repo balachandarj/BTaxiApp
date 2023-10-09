@@ -1,4 +1,4 @@
-﻿namespace TaxiApi.Models
+﻿namespace TaxiModel.Models
 {
     public class User
     {

@@ -39,5 +39,11 @@ namespace TaxiWeb.Controllers
             }
             return View(user);
         }
+
+        public async Task<ActionResult> Index()
+        {
+            List<User> users = await _apiService.GetUserAsync();
+            return View(users);
+        }
     }
 }

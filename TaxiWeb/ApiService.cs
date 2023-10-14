@@ -1,4 +1,5 @@
-﻿using TaxiModel.Models;
+﻿using Newtonsoft.Json;
+using TaxiModel.Models;
 
 namespace TaxiWeb
 {
@@ -41,6 +42,38 @@ namespace TaxiWeb
                 // Handle exceptions here
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
+            }
+        }
+
+
+        public async Task<List<User>> GetUserAsync()
+        {
+            try
+            {
+                
+                // Make a Get request to the external API               
+                var response = await _httpClient.GetAsync("/User/GetUser");
+
+                // Check if the request was successful
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    List<User> users = JsonConvert.DeserializeObject<List<User>>(jsonContent);
+                    return users;
+                }
+                else
+                {
+                    // Handle errors here, e.g., log the response content
+                    var errorResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error from external API: {errorResponse}");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions here
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
             }
         }
 
